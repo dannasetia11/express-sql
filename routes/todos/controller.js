@@ -2,16 +2,15 @@ const { connection } = require("../../config");
 
 module.exports = {
   getAll: (req, res) => {
-    console.log(req.params.name);
-
     connection.query(
-      `select * from todo WHERE name='${req.params.name}'`,
+      `Select * from todo where email = ?`,
+      req.params.email,
       (error, results, fields) => {
         if (error) {
-          res.status(500).send({ msg: "have error" });
+          res.status(500).send({ message: "there is something wrong" });
         } else {
           res.status(200).send({
-            msg: "show data",
+            message: "Show All Data",
             data: results
           });
         }
